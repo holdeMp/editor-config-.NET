@@ -5,7 +5,7 @@
     <AssemblyName>Editorconfig</AssemblyName>
     <PackageId>Editorconfig</PackageId>
     <PackageTags>editorconfig;codestyle</PackageTags>
-    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/holdeMp/editor-config-.NET</RepositoryUrl>
     <Copyright>Copyright 2025</Copyright>
