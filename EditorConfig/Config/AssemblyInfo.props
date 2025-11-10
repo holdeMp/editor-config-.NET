@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Editorconfig</AssemblyTitle>
+    <Description>Editorconfig template for C# projects.</Description>
+    <AssemblyName>Editorconfig</AssemblyName>
+    <PackageId>Editorconfig</PackageId>
+    <PackageTags>editorconfig;codestyle</PackageTags>
+    <PackageLicenseUrl>https://opensource.org/licenses/Apache-2.0</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/holdeMp/editor-config-.NET</RepositoryUrl>
+    <Copyright>Copyright 2025</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Product>Editorconfig</Product>
+  </PropertyGroup>
+</Project>
