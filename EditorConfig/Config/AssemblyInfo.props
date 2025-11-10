@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project>
   <PropertyGroup>
     <AssemblyTitle>Editorconfig</AssemblyTitle>
     <Description>Editorconfig template for C# projects.</Description>
