@@ -11,5 +11,13 @@
     <Copyright>Copyright 2025</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Product>Editorconfig</Product>
+    <SignAssembly>True</SignAssembly>
+    <IsPackable>true</IsPackable>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <RootNamespace>Editorconfig</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 </Project>

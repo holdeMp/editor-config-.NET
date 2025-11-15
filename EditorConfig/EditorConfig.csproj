@@ -1,26 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
-    <!-- Disable default excludes to include .editorconfig -->
-    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+        <!-- Disable default excludes to include .editorconfig -->
+        <NoDefaultExcludes>true</NoDefaultExcludes>
 
-    <!-- Optional: Add README -->
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include=".editorconfig" Pack="true" PackagePath="contentFiles/any/any/.editorconfig"/>
-    <None Include=".editorconfig" Pack="true" PackagePath="content/.editorconfig"/>
-    <!-- Include README if you have one -->
-    <None Include="../README.md" Pack="true" PackagePath="\"/>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MinVer" Version="6.1.0-beta.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+        <!-- Optional: Add README -->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="Config/Editorconfig.props" Pack="true" PackagePath="\build"/>
+        <Content Include="content/.editorconfig" Pack="true" PackagePath="content\.editorconfig"/>
+        <!-- Include README if you have one -->
+        <None Include="../README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MinVer" Version="6.1.0-beta.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-  <Import Project="Config/AssemblyInfo.props"/>
-  <Import Project="Config/Build.props"/>
+    <Import Project="Config/AssemblyInfo.props"/>
 </Project>
