@@ -9,10 +9,14 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="Config/Editorconfig.props" Pack="true" PackagePath="\build"/>
-        <Content Include="content/.editorconfig" Pack="true" PackagePath="content\.editorconfig"/>
-        <!-- Include README if you have one -->
-        <None Include="../README.md" Pack="true" PackagePath="\"/>
+        <!-- Include README in package -->
+        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <!-- Include .editorconfig file -->
+        <None Include="content\.editorconfig" Pack="true" PackagePath="content\"/>
+
+        <!-- Include build targets -->
+        <None Include="build\Editorconfig.targets" Pack="true" PackagePath="build\"/>
+        <None Include="buildTransitive\Editorconfig.targets" Pack="true" PackagePath="buildTransitive\"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="MinVer" Version="6.1.0-beta.1">

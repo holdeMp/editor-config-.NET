@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Target Name="CopyEditorConfig" BeforeTargets="BeforeBuild">
+        <PropertyGroup>
+            <EditorConfigSourcePath>$(MSBuildThisFileDirectory)..\content\.editorconfig</EditorConfigSourcePath>
+            <EditorConfigDestPath>$(MSBuildProjectDirectory)\.editorconfig</EditorConfigDestPath>
+        </PropertyGroup>
+
+        <Copy
+                SourceFiles="$(EditorConfigSourcePath)"
+                DestinationFiles="$(EditorConfigDestPath)"
+                SkipUnchangedFiles="true"
+                Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
+
+        <Message
+                Text="EditorConfig file copied to project root: $(EditorConfigDestPath)"
+                Importance="high"
+                Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
+
+        <Message
+                Text="EditorConfig file already exists in project root, skipping copy."
+                Importance="low"
+                Condition="Exists('$(EditorConfigDestPath)')"/>
+    </Target>
+
+    <Target Name="UpdateEditorConfigIfNewer" BeforeTargets="BeforeBuild" Condition="'$(UpdateEditorConfigFromPackage)' == 'true'">
+        <PropertyGroup>
+            <EditorConfigSourcePath>$(MSBuildThisFileDirectory)..\content\.editorconfig</EditorConfigSourcePath>
+            <EditorConfigDestPath>$(MSBuildProjectDirectory)\.editorconfig</EditorConfigDestPath>
+        </PropertyGroup>
+
+        <Copy
+                SourceFiles="$(EditorConfigSourcePath)"
+                DestinationFiles="$(EditorConfigDestPath)"
+                SkipUnchangedFiles="true"
+                Condition="Exists('$(EditorConfigSourcePath)')"/>
+
+        <Message
+                Text="EditorConfig file updated from package"
+                Importance="high"/>
+    </Target>
+
+</Project>

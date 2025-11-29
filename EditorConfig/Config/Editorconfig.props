@@ -14,26 +14,7 @@
         <Nullable>enable</Nullable>
         <WarningsAsErrors>nullable</WarningsAsErrors>
         <LangVersion>latest</LangVersion>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
     </PropertyGroup>
-
-    <ItemGroup>
-        <EditorConfigFilesToCopy Include="$(MSBuildThisFileDirectory)../content/.editorconfig"/>
-    </ItemGroup>
-
-    <Target Name="CopyEditorConfig" BeforeTargets="BeforeBuild">
-        <Message Text="Copying the .editorconfig file from '@(EditorConfigFilesToCopy)' to '$(MSBuildProjectDirectory)'"/>
-        <Copy SourceFiles="@(EditorConfigFilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)" SkipUnchangedFiles="true" UseHardlinksIfPossible="false"/>
-    </Target>
-
-    <!--<ItemGroup>
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="4.2.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-    </ItemGroup>-->
-
+    
 </Project>

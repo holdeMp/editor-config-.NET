@@ -1,23 +1,23 @@
 <Project>
-  <PropertyGroup>
-    <AssemblyTitle>Editorconfig</AssemblyTitle>
-    <Description>Editorconfig template for C# projects.</Description>
-    <AssemblyName>Editorconfig</AssemblyName>
-    <PackageId>Editorconfig</PackageId>
-    <PackageTags>editorconfig;codestyle</PackageTags>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/holdeMp/editor-config-.NET</RepositoryUrl>
-    <Copyright>Copyright 2025</Copyright>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Product>Editorconfig</Product>
-    <SignAssembly>True</SignAssembly>
-    <IsPackable>true</IsPackable>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-    <OutputType>Library</OutputType>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <RootNamespace>Editorconfig</RootNamespace>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
+    <PropertyGroup>
+        <AssemblyTitle>Editorconfig</AssemblyTitle>
+        <Description>Editorconfig template for C# projects.</Description>
+        <AssemblyName>Editorconfig</AssemblyName>
+        <PackageId>Editorconfig</PackageId>
+        <PackageTags>editorconfig;codestyle</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/holdeMp/editor-config-.NET</RepositoryUrl>
+        <Copyright>Copyright 2025</Copyright>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Product>Editorconfig</Product>
+        <SignAssembly>True</SignAssembly>
+        <IsPackable>true</IsPackable>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>Editorconfig</RootNamespace>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
 </Project>
