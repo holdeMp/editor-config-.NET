@@ -1,33 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <Target Name="CopyEditorConfig" BeforeTargets="BeforeBuild">
+    <Target Name="CopyEditorConfigToSolution" BeforeTargets="BeforeBuild">
         <PropertyGroup>
             <EditorConfigSourcePath>$(MSBuildThisFileDirectory)..\content\.editorconfig</EditorConfigSourcePath>
-            <EditorConfigDestPath>$(MSBuildProjectDirectory)\.editorconfig</EditorConfigDestPath>
+
+            <!-- Try to get solution directory, handling trailing slashes -->
+            <RawSolutionDir>$(SolutionDir)</RawSolutionDir>
+            <RawSolutionDir Condition="'$(RawSolutionDir)' == '' OR '$(RawSolutionDir)' == '*Undefined*'"></RawSolutionDir>
+
+            <!-- Remove trailing slashes -->
+            <CleanSolutionDir Condition="'$(RawSolutionDir)' != ''">$([System.IO.Path]::GetFullPath('$(RawSolutionDir)'))</CleanSolutionDir>
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' != '' AND $(CleanSolutionDir.EndsWith('\'))">$(CleanSolutionDir.TrimEnd('\'))</CleanSolutionDir>
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' != '' AND $(CleanSolutionDir.EndsWith('/'))">$(CleanSolutionDir.TrimEnd('/'))</CleanSolutionDir>
+
+            <!-- If still no solution dir, walk up from project to find .sln file -->
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' == ''">$([System.IO.Directory]::GetParent('$(MSBuildProjectDirectory)'))</CleanSolutionDir>
+
+            <EditorConfigDestPath>$(CleanSolutionDir)\.editorconfig</EditorConfigDestPath>
         </PropertyGroup>
 
+        <!-- Write debug info to a file in the project directory so you can see it -->
+        <WriteLinesToFile
+                File="$(MSBuildProjectDirectory)\editorconfig-debug.txt"
+                Lines="SolutionDir: $(SolutionDir);CleanSolutionDir: $(CleanSolutionDir);ProjectDir: $(MSBuildProjectDirectory);Destination: $(EditorConfigDestPath)"
+                Overwrite="true"/>
+
+        <!-- Copy only if source exists and destination doesn't exist -->
         <Copy
                 SourceFiles="$(EditorConfigSourcePath)"
                 DestinationFiles="$(EditorConfigDestPath)"
                 SkipUnchangedFiles="true"
                 Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
 
-        <Message
-                Text="EditorConfig file copied to project root: $(EditorConfigDestPath)"
-                Importance="high"
+        <Warning
+                Text="EditorConfig copied to: $(EditorConfigDestPath)"
                 Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
 
-        <Message
-                Text="EditorConfig file already exists in project root, skipping copy."
-                Importance="low"
+        <Warning
+                Text="EditorConfig already exists at: $(EditorConfigDestPath)"
                 Condition="Exists('$(EditorConfigDestPath)')"/>
     </Target>
 
+    <!-- Optional: Update existing .editorconfig if the package version is newer -->
     <Target Name="UpdateEditorConfigIfNewer" BeforeTargets="BeforeBuild" Condition="'$(UpdateEditorConfigFromPackage)' == 'true'">
         <PropertyGroup>
             <EditorConfigSourcePath>$(MSBuildThisFileDirectory)..\content\.editorconfig</EditorConfigSourcePath>
-            <EditorConfigDestPath>$(MSBuildProjectDirectory)\.editorconfig</EditorConfigDestPath>
+
+            <RawSolutionDir>$(SolutionDir)</RawSolutionDir>
+            <RawSolutionDir Condition="'$(RawSolutionDir)' == '' OR '$(RawSolutionDir)' == '*Undefined*'"></RawSolutionDir>
+
+            <CleanSolutionDir Condition="'$(RawSolutionDir)' != ''">$([System.IO.Path]::GetFullPath('$(RawSolutionDir)'))</CleanSolutionDir>
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' != '' AND $(CleanSolutionDir.EndsWith('\'))">$(CleanSolutionDir.TrimEnd('\'))</CleanSolutionDir>
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' != '' AND $(CleanSolutionDir.EndsWith('/'))">$(CleanSolutionDir.TrimEnd('/'))</CleanSolutionDir>
+
+            <CleanSolutionDir Condition="'$(CleanSolutionDir)' == ''">$([System.IO.Directory]::GetParent('$(MSBuildProjectDirectory)'))</CleanSolutionDir>
+
+            <EditorConfigDestPath>$(CleanSolutionDir)\.editorconfig</EditorConfigDestPath>
         </PropertyGroup>
 
         <Copy
@@ -36,9 +65,8 @@
                 SkipUnchangedFiles="true"
                 Condition="Exists('$(EditorConfigSourcePath)')"/>
 
-        <Message
-                Text="EditorConfig file updated from package"
-                Importance="high"/>
+        <Warning
+                Text="EditorConfig updated at: $(EditorConfigDestPath)"/>
     </Target>
 
 </Project>
