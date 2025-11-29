@@ -20,26 +20,12 @@
             <EditorConfigDestPath>$(CleanSolutionDir)\.editorconfig</EditorConfigDestPath>
         </PropertyGroup>
 
-        <!-- Write debug info to a file in the project directory so you can see it -->
-        <WriteLinesToFile
-                File="$(MSBuildProjectDirectory)\editorconfig-debug.txt"
-                Lines="SolutionDir: $(SolutionDir);CleanSolutionDir: $(CleanSolutionDir);ProjectDir: $(MSBuildProjectDirectory);Destination: $(EditorConfigDestPath)"
-                Overwrite="true"/>
-
         <!-- Copy only if source exists and destination doesn't exist -->
         <Copy
                 SourceFiles="$(EditorConfigSourcePath)"
                 DestinationFiles="$(EditorConfigDestPath)"
                 SkipUnchangedFiles="true"
                 Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
-
-        <Warning
-                Text="EditorConfig copied to: $(EditorConfigDestPath)"
-                Condition="Exists('$(EditorConfigSourcePath)') AND !Exists('$(EditorConfigDestPath)')"/>
-
-        <Warning
-                Text="EditorConfig already exists at: $(EditorConfigDestPath)"
-                Condition="Exists('$(EditorConfigDestPath)')"/>
     </Target>
 
     <!-- Optional: Update existing .editorconfig if the package version is newer -->
@@ -64,9 +50,6 @@
                 DestinationFiles="$(EditorConfigDestPath)"
                 SkipUnchangedFiles="true"
                 Condition="Exists('$(EditorConfigSourcePath)')"/>
-
-        <Warning
-                Text="EditorConfig updated at: $(EditorConfigDestPath)"/>
     </Target>
 
 </Project>
